@@ -1,4 +1,4 @@
-import {expect, Page} from "@playwright/test";
+import {Page} from "@playwright/test";
 
 export default class LandingPage {
     page: Page;
@@ -12,12 +12,12 @@ export default class LandingPage {
     This is a good practice because it allows you to change the element,
     and it will be updated in all the tests that use it.
     */
-    private loginButton = () => this.page.getByTestId('login-select');
-    private loginWithHudl = () => this.page.getByTestId('login-hudl');
+    private readonly loginButton = () => this.page.getByTestId('login-select');
+    private readonly loginWithHudl = () => this.page.getByTestId('login-hudl');
 
     // Actions
     // We're navigating to the landing page here by using the BaseURL from the config file
-    async goto() {
+    async navigateToLandingPage() {
         await this.page.goto('/');
     }
 

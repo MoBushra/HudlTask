@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "yarn playwright test",
+    "headed": "yarn playwright test --headed",
     "debug": "PWDEBUG=1 yarn playwright test"
   },
   "dependencies": {

@@ -7,18 +7,16 @@ export default class CheckYourEmailPage {
         this.page = page;
     }
 
-    //Define our locators
-    private headlineText = () => this.page.getByRole('heading', { name: 'Check Your Email' });
-
+    // Define our locators
+    private readonly headlineTextLocator = () => this.page.getByRole('heading', { name: 'Check Your Email' });
 
     // Define a method to navigate directly to this page
-    async navigateToCheckYourEmailPage() {
+    async navigateToPage() {
         await this.page.goto('/login/help');
     }
 
     // Check that the text provided by the user matches that of headline text
-    async checkHeadlineText(text: string) {
-        await expect(this.headlineText()).toHaveText(text);
+    async verifyHeadlineText(text: string) {
+        await expect(this.headlineTextLocator()).toHaveText(text);
     }
-
 }

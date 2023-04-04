@@ -8,13 +8,13 @@ export default class LoginPage {
     }
 
     // Locators
-    private emailInput = () => this.page.getByTestId('email-input');
-    private passwordInput = () => this.page.getByTestId('password-input');
-    private loginButton = () => this.page.getByTestId('login-btn');
-    private loginWithSsoButton = () => this.page.getByTestId('log-in-with-organization-btn');
-    private errorDisplay = () => this.page.getByTestId('error-display');
-    private rememberMeCheckbox = () => this.page.getByTestId('remember-me-checkbox-label');
-    private needsHelpLink = () => this.page.getByTestId('need-help-link');
+    private readonly emailInput = () => this.page.getByTestId('email-input');
+    private readonly passwordInput = () => this.page.getByTestId('password-input');
+    private readonly loginButton = () => this.page.getByTestId('login-btn');
+    private readonly loginWithSsoButton = () => this.page.getByTestId('log-in-with-organization-btn');
+    private readonly errorDisplay = () => this.page.getByTestId('error-display');
+    private readonly rememberMeCheckbox = () => this.page.getByTestId('remember-me-checkbox-label');
+    private readonly needsHelpLink = () => this.page.getByTestId('need-help-link');
 
 
     // Actions
@@ -23,11 +23,11 @@ export default class LoginPage {
         await this.page.goto('/login');
     }
 
-    async navigateToSsoLoginPage() {
-        await this.loginWithSsoButton().click();
-    }
-
-    // Verify that we can log in with valid credentials and expect the error message to not be visible
+    /**
+     * Logs in with valid credentials and expects the error message to not be visible.
+     * @param email - The email to log in with.
+     * @param password - The password to log in with.
+     */
     async loginWithValidCredentials(email: string, password: string) {
         await expect(this.loginButton()).toBeVisible();
         await this.emailInput().fill(email);
@@ -36,7 +36,11 @@ export default class LoginPage {
         await expect(this.errorDisplay()).not.toBeVisible();
     }
 
-    // Verify that we receive an error message when we log in with invalid credentials
+    /**
+     * Logs in with invalid credentials and expects an error message to be displayed.
+     * @param email - The email to log in with.
+     * @param password - The password to log in with.
+     */
     async loginWithInvalidCredentials(email: string, password: string) {
         await expect(this.loginButton()).toBeVisible();
         await this.emailInput().fill(email);

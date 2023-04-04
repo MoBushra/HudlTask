@@ -10,9 +10,9 @@ export default class LoginSsoPage {
     }
 
     // Locators
-    private emailInput = () => this.page.locator('input#uniId_1'); //
-    private loginSsoButton = () => this.page.getByTestId('log-in-with-sso');
-    private errorDisplay = () => this.page.getByTestId('error-display');
+    private readonly ssoEmailInput = () => this.page.locator('input#uniId_1'); //
+    private readonly loginSsoButton = () => this.page.getByTestId('log-in-with-sso');
+    private readonly errorDisplay = () => this.page.getByTestId('error-display');
 
     // Define a method to navigate to the page directly if needed by adding '/app/auth/login/organization' to the base URL
     async navigateToSsoLogin() {
@@ -23,14 +23,14 @@ export default class LoginSsoPage {
     Verify login works with SSO using an email parameter and that the error message is not visible
     */
     async loginWithSso(email) {
-        await this.emailInput().fill(email);
+        await this.ssoEmailInput().fill(email);
         await this.loginSsoButton().click();
         await expect(this.errorDisplay()).not.toBeVisible();
     }
 
     // Verify that we receive an error message when we log in with non-ss0 email
     async loginWithInvalidSso(email) {
-        await this.emailInput().fill(email);
+        await this.ssoEmailInput().fill(email);
         await this.loginSsoButton().click();
         await this.checkErrorDisplayText('This account can\'t log in with an organization yet. Please log in using your email and password.');
     }

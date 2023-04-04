@@ -11,9 +11,9 @@ export default class LoginHelp {
     }
 
     //Define our locators
-    private passResetEmailInput = () => this.page.getByTestId('password-reset-input');
-    private sendPassResetEmailButton = () => this.page.getByTestId('password-reset-submit-btn');
-    private passwordResetEmailSentMessage = () => this.page.getByTestId('password-reset-error-display');
+    private readonly passResetEmailInput = () => this.page.getByTestId('password-reset-input');
+    private readonly sendPassResetEmailButton = () => this.page.getByTestId('password-reset-submit-btn');
+    private readonly passwordResetEmailSentMessage = () => this.page.getByTestId('password-reset-error-display');
 
 
     // Define a method to navigate directly to this page
@@ -26,21 +26,24 @@ export default class LoginHelp {
         await this.passResetEmailInput().fill(email);
         await this.sendPassResetEmailButton().click();
         // expect to be taken to 'check your email' page
-        await this.checkYourEmailPage.checkHeadlineText('Check Your Email');
+        await this.checkYourEmailPage.verifyHeadlineText('Check Your Email');
     }
 
     // Define a method to reset your password with an invalid email format
     async invalidResetPasswordInvalidEmailFormat(email: string) {
         await this.passResetEmailInput().fill(email);
         await this.sendPassResetEmailButton().click();
-        await expect(this.passwordResetEmailSentMessage()).toHaveText('That isn\'t a valid email address. Make sure to use the email@domain.com format.');
+        await this.checkErrorDisplayText('That isn\'t a valid email address. Make sure to use the email@domain.com format.');
     }
 
     // Define a method to reset your password with an non-registered email
     async invalidResetPassword(email: string) {
         await this.passResetEmailInput().fill(email);
         await this.sendPassResetEmailButton().click();
-        await expect(this.passwordResetEmailSentMessage()).toHaveText('That email address doesn\'t exist in Hudl. Check with your coach to ensure they have the right email address for you.');
+        await this.checkErrorDisplayText('That email address doesn\'t exist in Hudl. Check with your coach to ensure they have the right email address for you.');
     }
 
+    async checkErrorDisplayText(text: string) {
+        await expect(this.passwordResetEmailSentMessage()).toHaveText(text);
+    }
 }

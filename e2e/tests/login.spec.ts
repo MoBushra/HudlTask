@@ -5,6 +5,7 @@ import LoginHelpPage from "../pages/loginHelp.page";
 import LoginSsoPage from "../pages/loginSso.page";
 
 test.describe("Login Functionality", () => {
+    // These are environment variables that are set in the .env file
     const email = process.env.HUDL_EMAIL;
     const password = process.env.HUDL_PASSWORD;
 
@@ -28,7 +29,6 @@ test.describe("Login Functionality", () => {
 
     test("Should log in with valid credentials", async () => {
         try {
-            await landingPage.hudlLogin();
             await loginPage.loginWithValidCredentials(email, password);
         } catch (error) {
             console.error("Login with valid credentials failed: " + error);

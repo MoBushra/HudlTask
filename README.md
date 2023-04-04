@@ -37,6 +37,14 @@ Check the version of Yarn
 
 ### Running the tests
 
+#### **Create a .env file in the root of the project**
+Containing the following:
+    
+        HUDL_EMAIL=''
+        HUDL_PASSWORD=''
+        INVALID_CREDENTIALS_MESSAGE=''
+
+
 #### **To run the tests, run the following command (headless mode)**
 
     yarn playwright test

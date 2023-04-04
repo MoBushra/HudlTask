@@ -1,0 +1,17 @@
+{
+  "name": "hudle2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mohamed Bushra",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.32.1"
+  },
+  "scripts": {
+    "test": "yarn playwright test",
+    "debug": "PWDEBUG=1 yarn playwright test"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
